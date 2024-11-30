@@ -1,4 +1,7 @@
 import { Router } from "express";
+import { adaptRouter } from "../adaptRouter/express-adapter";
+import { AddChildController } from "../../../presentation/controllers/add-child.controller";
+import { addChildController } from "./handle";
 
 export class AppRoutes {
   public router: Router;
@@ -9,8 +12,6 @@ export class AppRoutes {
   }
 
   routerInitiliazer() {
-    this.router.get('/', (req, res) => {
-      res.send('Hello World!');
-    })
+    this.router.get('/', adaptRouter(addChildController));
   }
 }
