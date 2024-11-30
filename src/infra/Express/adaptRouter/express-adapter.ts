@@ -4,11 +4,12 @@ import { HttpRequest } from "../../../presentation/http/httpRequest"
 
 export const adaptRouter = (controller: Controller) => {
   return async (req: Request, res: Response) => {
+    const { body, params, query, headers } = req
     const httpRequest: HttpRequest = {
-      ...(req.body),
-      ...(req.params),
-      ...(req.query),
-      ...(req.headers),
+      body,
+      params,
+      query,
+      headers, 
     }
     const httpResponse = await controller.handle(httpRequest)
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {

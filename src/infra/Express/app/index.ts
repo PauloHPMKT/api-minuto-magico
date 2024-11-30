@@ -1,4 +1,4 @@
-import express, { Application, json } from "express";
+import express, { Application, json, urlencoded } from "express";
 import { AppRoutes } from "../routes";
 
 export class App {
@@ -13,7 +13,8 @@ export class App {
 
 	setMiddlewares() {
 		const middlewares = [
-			json()
+			json(),
+			urlencoded({ extended: true })
 		]
 		middlewares.forEach(middleware => this.app.use(middleware));
 	}
