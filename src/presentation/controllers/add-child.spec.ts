@@ -1,5 +1,8 @@
+import { AddChildController } from "./add-child.controller"
+
 describe('AddChild Controller', () => {
-  test('should return 200 if valid data is provided', () => {
-    expect(1).toBe(1)
+  it('Should be defined', () => {
+    const sut = new AddChildController()
+    expect(sut).toBeDefined()
   })
 })
