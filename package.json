@@ -4,6 +4,7 @@
   "description": "Projeto pula pula",
   "main": "index.js",
   "scripts": {
+    "start:dev": "tsx --watch src/main.ts --outDir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
