@@ -1,4 +1,4 @@
-import { App } from "./infra/app";
+import { App } from "./infra/Express/app";
 
 const port = 3000;
 
