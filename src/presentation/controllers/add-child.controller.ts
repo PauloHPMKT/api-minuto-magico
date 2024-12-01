@@ -21,6 +21,8 @@ export class AddChildController implements Controller {
       return badRequest(new Error('The totalMinutes must be a number'))
     } 
 
-    return ok({ name, totalMinutes })
+    const child = this.addChildUseCase.add({ name, totalMinutes })
+
+    return ok(child)
   }
 }
