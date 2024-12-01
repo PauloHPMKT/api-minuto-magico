@@ -4,19 +4,16 @@ import { Controller } from "../protocols/Controller"
 
 export class AddChildController implements Controller {
   async handle(params: HttpRequest): Promise<HttpResponse> {
-    if (!params.body.name) {
-      return {
-        statusCode: 400,
-        body: new Error("Missing param: name")
+    const requiredFields = ['name', 'totalMinutes']
+    for (const field of requiredFields) {
+      if (!params.body[field]) {
+        return {
+          statusCode: 400,
+          body: new Error(`Missing param: ${field}`)
+        }
       }
     }
-
-    if (!params.body.totalMinutes) {
-      return {
-        statusCode: 400,
-        body: new Error("Missing param: totalMinutes")
-      }
-    }
+    
     return {
       statusCode: 200,
       body: {
