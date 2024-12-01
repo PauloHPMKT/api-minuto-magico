@@ -1,3 +1,4 @@
+import { badRequest } from "../helpers/http-helpers"
 import { HttpResponse } from "../http/httpReponse"
 import { HttpRequest } from "../http/httpRequest"
 import { Controller } from "../protocols/Controller"
@@ -7,19 +8,13 @@ export class AddChildController implements Controller {
     const requiredFields = ['name', 'totalMinutes']
     for (const field of requiredFields) {
       if (!params.body[field]) {
-        return {
-          statusCode: 400,
-          body: new Error(`Missing param: ${field}`)
-        }
+        return badRequest(new Error(`Missing param: ${field}`))
       }
     }
     
     const { name, totalMinutes } = params.body
     if (typeof totalMinutes !== 'number') {
-      return {
-        statusCode: 400,
-        body: new Error('The totalMinutes must be a number')
-      }
+      return badRequest(new Error('The totalMinutes must be a number'))
     } 
 
     return {
