@@ -10,6 +10,13 @@ export class AddChildController implements Controller {
         body: new Error("Missing param: name")
       }
     }
+
+    if (!params.body.totalMinutes) {
+      return {
+        statusCode: 400,
+        body: new Error("Missing param: totalMinutes")
+      }
+    }
     return {
       statusCode: 200,
       body: {
