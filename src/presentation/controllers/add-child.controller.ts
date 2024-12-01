@@ -14,6 +14,14 @@ export class AddChildController implements Controller {
       }
     }
     
+    const { name, totalMinutes } = params.body
+    if (typeof totalMinutes !== 'number') {
+      return {
+        statusCode: 400,
+        body: new Error('The totalMinutes must be a number')
+      }
+    } 
+
     return {
       statusCode: 200,
       body: {
