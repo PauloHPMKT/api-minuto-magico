@@ -1,19 +1,38 @@
+import { AddChildUseCase } from "../../domain/usecases/add-child"
 import { MissinParamError } from "../error/missing-param.error"
 import { AddChildController } from "./add-child.controller"
 
-const makeSut = (): AddChildController => {
-  const sut = new AddChildController()
-  return sut
+const makeAddChildUseCase = ():AddChildUseCase => {
+  class AddChildUseCaseStub implements AddChildUseCase {
+    add(data: any): any {
+      return {}
+    }
+  }
+  return new AddChildUseCaseStub()
+}
+
+const makeSut = (): SutTypes => {
+  const addChildUseCaseStub = makeAddChildUseCase()
+  const sut = new AddChildController(addChildUseCaseStub)
+  return {
+    sut,
+    addChildUseCaseStub
+  }
+}
+
+interface SutTypes {
+  sut: AddChildController
+  addChildUseCaseStub: AddChildUseCase
 }
 
 describe('AddChild Controller', () => {
   it('Should be defined', () => {
-    const sut = makeSut()
+    const { sut } = makeSut()
     expect(sut).toBeDefined()
   })
 
   it('Should return 400 if no name is provided', async () => {
-    const sut = makeSut()
+    const { sut } = makeSut()
     const httpRequest = {
       body: {
         totalMinutes: 10,
@@ -25,7 +44,7 @@ describe('AddChild Controller', () => {
   })
 
   it('Should return 400 if no totalMinutes is provided', async () => {
-    const sut = makeSut()
+    const { sut } = makeSut()
     const httpRequest = {
       body: {
         name: 'any_name',
@@ -37,7 +56,7 @@ describe('AddChild Controller', () => {
   })
 
   it('Should return 400 if totalMinutes is not a number', async () => {
-    const sut = makeSut()
+    const { sut } = makeSut()
     const httpRequest = {
       body: {
         name: 'any_name',
@@ -50,7 +69,7 @@ describe('AddChild Controller', () => {
   })
 
   it('Should return 200 if all required fields are provided', async () => {
-    const sut = makeSut()
+    const { sut } = makeSut()
     const httpRequest = {
       body: {
         name: 'any_name',
