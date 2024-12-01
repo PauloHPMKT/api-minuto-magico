@@ -1,3 +1,4 @@
+import { MissinParamError } from "../error/missing-param.error"
 import { badRequest } from "../helpers/http-helpers"
 import { HttpResponse } from "../http/httpReponse"
 import { HttpRequest } from "../http/httpRequest"
@@ -8,7 +9,7 @@ export class AddChildController implements Controller {
     const requiredFields = ['name', 'totalMinutes']
     for (const field of requiredFields) {
       if (!params.body[field]) {
-        return badRequest(new Error(`Missing param: ${field}`))
+        return badRequest(new MissinParamError(field))
       }
     }
     

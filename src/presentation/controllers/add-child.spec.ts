@@ -1,3 +1,4 @@
+import { MissinParamError } from "../error/missing-param.error"
 import { AddChildController } from "./add-child.controller"
 
 const makeSut = (): AddChildController => {
@@ -20,7 +21,7 @@ describe('AddChild Controller', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new Error('Missing param: name'))
+    expect(httpResponse.body).toEqual(new MissinParamError('name'))
   })
 
   it('Should return 400 if no totalMinutes is provided', async () => {
@@ -32,7 +33,7 @@ describe('AddChild Controller', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new Error('Missing param: totalMinutes'))
+    expect(httpResponse.body).toEqual(new MissinParamError('totalMinutes'))
   })
 
   it('Should return 400 if totalMinutes is not a number', async () => {
