@@ -1,5 +1,5 @@
 import { MissinParamError } from "../error/missing-param.error"
-import { badRequest } from "../helpers/http-helpers"
+import { badRequest, ok } from "../helpers/http-helpers"
 import { HttpResponse } from "../http/httpReponse"
 import { HttpRequest } from "../http/httpRequest"
 import { Controller } from "../protocols/Controller"
@@ -18,11 +18,6 @@ export class AddChildController implements Controller {
       return badRequest(new Error('The totalMinutes must be a number'))
     } 
 
-    return {
-      statusCode: 200,
-      body: {
-        message: "Hello World"
-      }
-    }
+    return ok({ name, totalMinutes })
   }
 }
