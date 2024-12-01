@@ -1,3 +1,4 @@
+import { AddChildUseCase } from "../../domain/usecases/add-child"
 import { MissinParamError } from "../error/missing-param.error"
 import { badRequest, ok } from "../helpers/http-helpers"
 import { HttpResponse } from "../http/httpReponse"
@@ -5,6 +6,8 @@ import { HttpRequest } from "../http/httpRequest"
 import { Controller } from "../protocols/Controller"
 
 export class AddChildController implements Controller {
+  constructor(private readonly addChildUseCase: AddChildUseCase) {}
+
   async handle(params: HttpRequest): Promise<HttpResponse> {
     const requiredFields = ['name', 'totalMinutes']
     for (const field of requiredFields) {
