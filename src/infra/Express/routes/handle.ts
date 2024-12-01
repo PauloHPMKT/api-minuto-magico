@@ -1,6 +1,8 @@
+import { AddChildUseCaseImplementation } from "../../../application/add-child.usecase";
 import { AddChildController } from "../../../presentation/controllers/add-child.controller";
 
-const addChildController = new AddChildController();
+const addChildUseCase = new AddChildUseCaseImplementation();
+const addChildController = new AddChildController(addChildUseCase);
 
 export {
   addChildController,

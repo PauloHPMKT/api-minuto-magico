@@ -2,13 +2,13 @@ import { AddChildUseCase } from "../../domain/usecases/add-child"
 import { MissinParamError } from "../error/missing-param.error"
 import { AddChildController } from "./add-child.controller"
 
-const makeAddChildUseCase = ():AddChildUseCase => {
-  class AddChildUseCaseStub implements AddChildUseCase {
+const makeAddChildUseCase = (): AddChildUseCase => {
+  class AddChildUseCaseImplementationStub implements AddChildUseCase {
     add(data: any): any {
       return {}
     }
   }
-  return new AddChildUseCaseStub()
+  return new AddChildUseCaseImplementationStub()
 }
 
 const makeSut = (): SutTypes => {
