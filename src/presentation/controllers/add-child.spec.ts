@@ -48,4 +48,16 @@ describe('AddChild Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new Error('The totalMinutes must be a number'))
   })
+
+  it('Should return 200 if all required fields are provided', async () => {
+    const sut = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        totalMinutes: 10,
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+  })
 })
