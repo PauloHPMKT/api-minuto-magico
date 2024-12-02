@@ -1,11 +1,18 @@
-import { AddChildUseCase } from "../../domain/usecases/add-child"
+import { AddChildModel } from "../../domain/models/add-child.model"
+import { AddChildUseCase, ChildModel } from "../../domain/usecases/add-child"
 import { MissinParamError } from "../error/missing-param.error"
 import { AddChildController } from "./add-child.controller"
 
 const makeAddChildUseCase = (): AddChildUseCase => {
   class AddChildUseCaseImplementationStub implements AddChildUseCase {
-    add(data: any): any {
-      return {}
+    async add(data: AddChildModel): Promise<ChildModel> {
+      const fakeChild = {
+        id: 'valid_id',
+        name: 'valid_name',
+        enterDateTime: new Date(),
+        totalMinutes: 10,
+      }
+      return new Promise(resolve => resolve(fakeChild))
     }
   }
   return new AddChildUseCaseImplementationStub()
@@ -95,4 +102,19 @@ describe('AddChild Controller', () => {
       totalMinutes: 10
     })
    })
+
+  it('Should return 500 if AddChildUseCase throws', async () => {
+    const { sut, addChildUseCaseStub } = makeSut()
+    jest.spyOn(addChildUseCaseStub, 'add').mockImplementationOnce(async () => {
+      return new Promise((resolve, reject) => reject(new Error()))
+    })
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        totalMinutes: 10,
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+  })
 })
