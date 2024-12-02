@@ -1,6 +1,6 @@
 import { AddChildUseCase } from "../../domain/usecases/add-child"
 import { MissinParamError } from "../error/missing-param.error"
-import { badRequest, ok } from "../helpers/http-helpers"
+import { badRequest, ok, serverError } from "../helpers/http-helpers"
 import { HttpResponse } from "../http/httpReponse"
 import { HttpRequest } from "../http/httpRequest"
 import { Controller } from "../protocols/Controller"
@@ -26,10 +26,7 @@ export class AddChildController implements Controller {
   
       return ok(child)
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: new Error('Internal server error')
-      }
+      return serverError()
     }
   }
 }
