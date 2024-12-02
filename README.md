@@ -21,3 +21,18 @@ Requisitos
     -> valor (calculo)
     -> forma de pagamento
         -> pix / especie / outros
+
+Fluxo de utilização:
+- Ter uma tela inicial onde o app possa ser inicializado
+    - Inserir o nome do operador
+
+- Essa inicialização deve salvar a data atual, indicando que o app esta em uso
+
+
+
+Entidades: 
+* Criança:
+    - nome
+    - hora de entrada
+    - hora de saída
+    - tempo (minutos)
