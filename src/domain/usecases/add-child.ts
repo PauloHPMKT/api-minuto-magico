@@ -11,5 +11,5 @@ export interface ChildModel {
 }
 
 export interface AddChildUseCase {
-    add(data: AddChildModel): ChildModel;
+    add(data: AddChildModel): Promise<ChildModel>;
 }

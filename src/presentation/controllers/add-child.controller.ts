@@ -9,20 +9,27 @@ export class AddChildController implements Controller {
   constructor(private readonly addChildUseCase: AddChildUseCase) {}
 
   async handle(params: HttpRequest): Promise<HttpResponse> {
-    const requiredFields = ['name', 'totalMinutes']
-    for (const field of requiredFields) {
-      if (!params.body[field]) {
-        return badRequest(new MissinParamError(field))
+    try {
+      const requiredFields = ['name', 'totalMinutes']
+      for (const field of requiredFields) {
+        if (!params.body[field]) {
+          return badRequest(new MissinParamError(field))
+        }
+      }
+      
+      const { name, totalMinutes } = params.body
+      if (typeof totalMinutes !== 'number') {
+        return badRequest(new Error('The totalMinutes must be a number'))
+      } 
+  
+      const child = await this.addChildUseCase.add({ name, totalMinutes })
+  
+      return ok(child)
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: new Error('Internal server error')
       }
     }
-    
-    const { name, totalMinutes } = params.body
-    if (typeof totalMinutes !== 'number') {
-      return badRequest(new Error('The totalMinutes must be a number'))
-    } 
-
-    const child = this.addChildUseCase.add({ name, totalMinutes })
-
-    return ok(child)
   }
 }
