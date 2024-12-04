@@ -1,20 +1,37 @@
+import { AddChildUseCase } from "../../domain/usecases/add-child"
 import { MissingParamError } from "../error/missing-param.error"
 import { badRequest } from "../helpers/http"
 import { Controller } from "../protocols/controller"
 import { HttpRequest, HttpResponse } from "../protocols/http"
 
 export class AddChildController implements Controller {
-  handle(httpRequest: HttpRequest): HttpResponse {
-    const requiredFields = ['name', 'totalMinutes']
-    for (const field of requiredFields) {
-      if (!httpRequest.body[field] || !httpRequest.body[field].length) {
-        return badRequest(new MissingParamError(field))
-      }
-    }
+  constructor(private readonly addChildUseCase: AddChildUseCase) {}
 
-    const { name, totalMinutes } = httpRequest.body
-    if (typeof totalMinutes !== 'number') {
-      return badRequest(new Error('totalMinutes must be a number'))
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    try {
+      const requiredFields = ['name', 'totalMinutes']
+      for (const field of requiredFields) {
+        if (!httpRequest.body[field]) {
+          return badRequest(new MissingParamError(field))
+        }
+      }
+
+      const { name, totalMinutes } = httpRequest.body
+      if (typeof totalMinutes !== 'number') {
+        return badRequest(new Error('totalMinutes must be a number'))
+      }
+
+      const child = await this.addChildUseCase.add({ name, totalMinutes })
+
+      return {
+        statusCode: 200,
+        body: child
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: new Error('Internal server error')
+      }
     }
   }
 }
