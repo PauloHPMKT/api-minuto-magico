@@ -1,4 +1,5 @@
 import { AddChildModel, AddChildUseCase, ChildModel } from "../../domain/usecases/add-child"
+import { InvalidParamError } from "../error/invalid-param.error"
 import { MissingParamError } from "../error/missing-param.error"
 import { ServerError } from "../error/server-error"
 import { AddChildController } from "./add-child"
@@ -75,6 +76,7 @@ describe('AddChildController', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new InvalidParamError('totalMinutes'))
   })
 
   it('Should AddChildController return 200 if all params is provided', async () => {
