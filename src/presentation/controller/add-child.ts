@@ -7,7 +7,7 @@ export class AddChildController implements Controller {
   handle(httpRequest: HttpRequest): HttpResponse {
     const requiredFields = ['name', 'totalMinutes']
     for (const field of requiredFields) {
-      if (!httpRequest.body[field]) {
+      if (!httpRequest.body[field] || !httpRequest.body[field].length) {
         return badRequest(new MissingParamError(field))
       }
     }
