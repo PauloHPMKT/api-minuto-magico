@@ -35,6 +35,16 @@ describe('AddChildController', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('totalMinutes'))
   })
 
+  it('Should AddChildController return 400 if no params is provided', () => {
+    const sut = makeSut()
+    const httpRequest = {
+      body: {}
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new MissingParamError('name'))
+  })
+
   it('Should AddChildController return 400 if totalMinutes is not a number', () => {
     const sut = makeSut()
     const httpRequest = {
