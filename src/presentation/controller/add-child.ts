@@ -11,5 +11,10 @@ export class AddChildController implements Controller {
         return badRequest(new MissingParamError(field))
       }
     }
+
+    const { name, totalMinutes } = httpRequest.body
+    if (typeof totalMinutes !== 'number') {
+      return badRequest(new Error('totalMinutes must be a number'))
+    }
   }
 }
