@@ -9,3 +9,8 @@ export const ok = (data: any): HttpResponse => ({
   statusCode: 200,
   body: data
 })
+
+export const serverError = () => ({
+  statusCode: 500,
+  body: new Error('Internal server error')
+})
