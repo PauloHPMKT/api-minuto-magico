@@ -1,1 +1,1 @@
-console.log('add-child.ts');
+export class AddChildController {}
