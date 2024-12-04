@@ -1,5 +1,6 @@
 import { AddChildModel, AddChildUseCase, ChildModel } from "../../domain/usecases/add-child"
 import { MissingParamError } from "../error/missing-param.error"
+import { ServerError } from "../error/server-error"
 import { AddChildController } from "./add-child"
 
 const makeAddChildUseCase = (): AddChildUseCase => {
@@ -101,5 +102,6 @@ describe('AddChildController', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 })
