@@ -16,6 +16,7 @@ export class AddChildController {
     if (isNaN(totalMinutes)) {
       return {
         statusCode: 400,
+        body: new Error('totalMinutes'),
       };
     }
   }
