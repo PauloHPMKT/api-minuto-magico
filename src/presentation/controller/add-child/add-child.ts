@@ -1,1 +1,1 @@
-console.log('Pré setup Teste');
+export class AddChildController {}
