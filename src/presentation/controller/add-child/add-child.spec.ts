@@ -1,13 +1,17 @@
 import { AddChildController } from './add-child';
 
+const makeSut = (): AddChildController => {
+  return new AddChildController();
+};
+
 describe('AddChildController', () => {
   it('Should be defined', () => {
-    const sut = new AddChildController();
+    const sut = makeSut();
     expect(sut).toBeDefined();
   });
 
   it('Should return 400 if no name is provided', () => {
-    const sut = new AddChildController();
+    const sut = makeSut();
     const httpRequest = {
       body: {
         totalMinutes: 10,
@@ -18,7 +22,7 @@ describe('AddChildController', () => {
   });
 
   it('Should return 400 if no totalMinutes is provided', () => {
-    const sut = new AddChildController();
+    const sut = makeSut();
     const httpRequest = {
       body: {
         name: 'any_name',
