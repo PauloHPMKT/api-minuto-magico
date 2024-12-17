@@ -1,5 +1,8 @@
+import { AddChildController } from './add-child';
+
 describe('AddChildController', () => {
-  it('Should be true', () => {
-    expect(true).toBe(true)
-  })
-})
+  it('Should be defined', () => {
+    const sut = new AddChildController();
+    expect(sut).toBeDefined();
+  });
+});
