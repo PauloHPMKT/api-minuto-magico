@@ -1,3 +1,4 @@
+import { InvalidParamError } from '../../errors/invalid-param.error';
 import { MissingParamError } from '../../errors/missing-param-error';
 import { AddChildController } from './add-child';
 
@@ -45,5 +46,6 @@ describe('AddChildController', () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new InvalidParamError('totalMinutes'));
   });
 });
