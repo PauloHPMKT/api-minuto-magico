@@ -31,4 +31,16 @@ describe('AddChildController', () => {
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
   });
+
+  it('Should return 400 if totalMinutes is not a number', () => {
+    const sut = makeSut();
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        totalMinutes: 'invalid_number',
+      },
+    };
+    const httpResponse = sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+  });
 });
