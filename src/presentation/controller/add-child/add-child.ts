@@ -5,6 +5,7 @@ export class AddChildController {
       if (!httpRequest.body[field]) {
         return {
           statusCode: 400,
+          body: new Error(`Missing param: ${field}`),
         };
       }
     }
