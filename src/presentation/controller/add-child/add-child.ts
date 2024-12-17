@@ -8,5 +8,12 @@ export class AddChildController {
         };
       }
     }
+
+    const { name, totalMinutes } = httpRequest.body;
+    if (isNaN(totalMinutes)) {
+      return {
+        statusCode: 400,
+      };
+    }
   }
 }
