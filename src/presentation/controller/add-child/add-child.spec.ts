@@ -19,6 +19,7 @@ describe('AddChildController', () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new Error('Missing param: name'));
   });
 
   it('Should return 400 if no totalMinutes is provided', () => {
@@ -30,6 +31,7 @@ describe('AddChildController', () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new Error('Missing param: totalMinutes'));
   });
 
   it('Should return 400 if totalMinutes is not a number', () => {
