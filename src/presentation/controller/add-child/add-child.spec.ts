@@ -12,31 +12,31 @@ describe('AddChildController', () => {
     expect(sut).toBeDefined();
   });
 
-  it('Should return 400 if no name is provided', () => {
+  it('Should return 400 if no name is provided', async () => {
     const sut = makeSut();
     const httpRequest = {
       body: {
         totalMinutes: 10,
       },
     };
-    const httpResponse = sut.handle(httpRequest);
+    const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('name'));
   });
 
-  it('Should return 400 if no totalMinutes is provided', () => {
+  it('Should return 400 if no totalMinutes is provided', async () => {
     const sut = makeSut();
     const httpRequest = {
       body: {
         name: 'any_name',
       },
     };
-    const httpResponse = sut.handle(httpRequest);
+    const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('totalMinutes'));
   });
 
-  it('Should return 400 if totalMinutes is not a number', () => {
+  it('Should return 400 if totalMinutes is not a number', async () => {
     const sut = makeSut();
     const httpRequest = {
       body: {
@@ -44,7 +44,7 @@ describe('AddChildController', () => {
         totalMinutes: 'invalid_number',
       },
     };
-    const httpResponse = sut.handle(httpRequest);
+    const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new InvalidParamError('totalMinutes'));
   });

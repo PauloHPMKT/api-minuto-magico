@@ -5,7 +5,7 @@ import { Controller } from '../../protocols/controller';
 import { HttpRequest, HttpResponse } from '../../protocols/http';
 
 export class AddChildController implements Controller {
-  handle(httpRequest: HttpRequest): any {
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const requiredFields = ['name', 'totalMinutes'];
     for (const field of requiredFields) {
       if (!httpRequest.body[field]) {
@@ -17,5 +17,10 @@ export class AddChildController implements Controller {
     if (isNaN(totalMinutes)) {
       return badRequest(new InvalidParamError('totalMinutes'));
     }
+
+    return {
+      statusCode: 200,
+      body: {},
+    };
   }
 }
