@@ -1,17 +1,18 @@
+import { randomBytes } from 'crypto';
+
 export class Child {
   public readonly id: string;
   public name: string;
   public totalMinutes: number;
   public entryTime: Date;
-  public exitTime: Date | null;
+  public exitTime?: Date;
   public createdAt?: Date;
-  public updatedAt: Date | null;
+  public updatedAt?: Date;
 
   constructor(props: Omit<Child, 'id'>, id?: string) {
-    this.id = id ?? 'any_id';
-    this.name = props.name;
-    this.totalMinutes = props.totalMinutes;
-    this.entryTime = props.entryTime;
+    Object.assign(this, props);
+
+    this.id = id || randomBytes(12).toString('hex');
     this.exitTime = props.exitTime ?? null;
     this.createdAt = props.createdAt ?? new Date();
     this.updatedAt = props.updatedAt ?? null;
