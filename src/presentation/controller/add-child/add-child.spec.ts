@@ -1,6 +1,6 @@
 import { Child } from '../../../domain/entities/Child';
 import { AddChild } from '../../../domain/usecase/add-child';
-import { AddChild as AddChildModel } from '../../../domain/models/add-child';
+import { AddChildModel } from '../../../domain/models/add-child';
 import { InvalidParamError } from '../../errors/invalid-param.error';
 import { MissingParamError } from '../../errors/missing-param-error';
 import { AddChildController } from './add-child';
