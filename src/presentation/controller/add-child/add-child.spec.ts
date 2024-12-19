@@ -4,6 +4,7 @@ import { AddChildModel } from '../../../domain/models/add-child';
 import { InvalidParamError } from '../../errors/invalid-param.error';
 import { MissingParamError } from '../../errors/missing-param-error';
 import { AddChildController } from './add-child';
+import { ServerError } from '../../errors/server-error';
 
 class AddChildStub implements AddChild {
   async add(child: AddChildModel.Params): Promise<Child> {
@@ -91,7 +92,7 @@ describe('AddChildController', () => {
     };
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(500);
-    expect(httpResponse.body).toEqual(new Error('Internal server error'));
+    expect(httpResponse.body).toEqual(new ServerError());
   });
 
   it('Should return 200 if valid data is provided', async () => {

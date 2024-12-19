@@ -1,3 +1,4 @@
+import { ok, serverError } from '../../helpers/http';
 import { AddChild } from '../../../domain/usecase/add-child';
 import { InvalidParamError } from '../../errors/invalid-param.error';
 import { MissingParamError } from '../../errors/missing-param-error';
@@ -24,16 +25,10 @@ export class AddChildController implements Controller {
 
       const child = await this.addChildUseCase.add({ name, totalMinutes });
 
-      return {
-        statusCode: 200,
-        body: child,
-      };
+      return ok(child);
     } catch (error) {
       console.error(error);
-      return {
-        statusCode: 500,
-        body: new Error('Internal server error'),
-      };
+      return serverError();
     }
   }
 }
