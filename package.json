@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ext .ts, .js",
-    "test": "jest --passWithNoTests --runInBand",
+    "test": "jest --silent --passWithNoTests --runInBand",
     "test:staged": "npm test --passWithNoTests --findRelatedTests",
     "prepare": "husky"
   },
