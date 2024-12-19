@@ -104,6 +104,15 @@ describe('AddChildController', () => {
     };
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(200);
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      totalMinutes: 10,
+      entryTime: expect.any(Date),
+      exitTime: null,
+      createdAt: expect.any(Date),
+      updatedAt: null,
+    });
   });
 
   it('Should call AddChild with correct values', async () => {
