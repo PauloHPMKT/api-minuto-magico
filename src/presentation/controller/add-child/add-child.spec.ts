@@ -91,5 +91,6 @@ describe('AddChildController', () => {
     };
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(500);
+    expect(httpResponse.body).toEqual(new Error('Internal server error'));
   });
 });
