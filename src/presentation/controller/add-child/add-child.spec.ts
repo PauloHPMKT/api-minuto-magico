@@ -93,4 +93,16 @@ describe('AddChildController', () => {
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual(new Error('Internal server error'));
   });
+
+  it('Should return 200 if valid data is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        totalMinutes: 10,
+      },
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(200);
+  });
 });
