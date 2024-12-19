@@ -105,4 +105,20 @@ describe('AddChildController', () => {
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(200);
   });
+
+  it('Should call AddChild with correct values', async () => {
+    const { sut, addChildStub } = makeSut();
+    const addSpy = jest.spyOn(addChildStub, 'add');
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        totalMinutes: 10,
+      },
+    };
+    await sut.handle(httpRequest);
+    expect(addSpy).toHaveBeenCalledWith({
+      name: 'any_name',
+      totalMinutes: 10,
+    });
+  });
 });
