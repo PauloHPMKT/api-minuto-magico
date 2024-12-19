@@ -1,10 +1,12 @@
+import { AddChildController } from './add-child';
 import { Child } from '../../../domain/entities/Child';
 import { AddChild } from '../../../domain/usecase/add-child';
 import { AddChildModel } from '../../../domain/models/add-child';
-import { InvalidParamError } from '../../errors/invalid-param.error';
-import { MissingParamError } from '../../errors/missing-param-error';
-import { AddChildController } from './add-child';
-import { ServerError } from '../../errors/server-error';
+import {
+  InvalidParamError,
+  MissingParamError,
+  ServerError,
+} from '../../errors';
 
 class AddChildStub implements AddChild {
   async add(child: AddChildModel.Params): Promise<Child> {
