@@ -6,7 +6,14 @@ import { AddChildRepository } from '../protocols/add-child-repository';
 export class DbAddChild implements AddChild {
   constructor(private readonly addChildRepository: AddChildRepository) {}
 
-  async add(child: AddChildModel.Params): Promise<Child> {
-    return await this.addChildRepository.add(child);
+  async add(data: AddChildModel.Params): Promise<Child> {
+    if (data.totalMinutes < 10) {
+      throw new Error('Total minutes must be at least 10');
+    }
+    const child = await this.addChildRepository.add({
+      name: data.name,
+      totalMinutes: data.totalMinutes,
+    });
+    return child;
   }
 }
