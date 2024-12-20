@@ -1,4 +1,11 @@
 import { Child } from './Child';
+import { randomBytes } from 'crypto';
+
+jest.mock('crypto', () => ({
+  randomBytes: jest.fn().mockReturnValue({
+    toString: jest.fn().mockReturnValue('f5c6b4f039674059e19338e0'),
+  }),
+}));
 
 const makeSut = (): SutTypes => {
   const child = {
@@ -34,7 +41,6 @@ describe('Child entity', () => {
       createdAt,
       updatedAt: null as any,
     });
-
     expect(sut).toHaveProperty('id');
     expect(sut.name).toEqual('valid_name');
     expect(sut.totalMinutes).toEqual(10);
@@ -53,5 +59,11 @@ describe('Child entity', () => {
       beforeCreation.getTime(),
     );
     expect(entryTime.getTime()).toBeLessThanOrEqual(afterCreation.getTime());
+  });
+
+  it('Should create a child with a valid id', () => {
+    const { sut } = makeSut();
+    expect(sut.id).toHaveLength(24);
+    expect(sut.id).toEqual('f5c6b4f039674059e19338e0');
   });
 });
