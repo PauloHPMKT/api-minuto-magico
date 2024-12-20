@@ -65,4 +65,19 @@ describe('DbAddChild', () => {
       totalMinutes: 10,
     });
   });
+
+  it('Should throw if AddChildRepository throws', async () => {
+    const { sut, addChildRepositoryStub } = makeSut();
+    jest
+      .spyOn(addChildRepositoryStub, 'add')
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error())),
+      );
+    const childData = {
+      name: 'valid_name',
+      totalMinutes: 10,
+    };
+    const promise = sut.add(childData);
+    await expect(promise).rejects.toThrow();
+  });
 });
