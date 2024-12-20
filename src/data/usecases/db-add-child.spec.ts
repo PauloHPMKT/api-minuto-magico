@@ -80,4 +80,22 @@ describe('DbAddChild', () => {
     const promise = sut.add(childData);
     await expect(promise).rejects.toThrow();
   });
+
+  it('Should return a child on success', async () => {
+    const { sut } = makeSut();
+    const childData = {
+      name: 'valid_name',
+      totalMinutes: 10,
+    };
+    const child = await sut.add(childData);
+    expect(child).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      totalMinutes: 10,
+      entryTime: expect.any(Date),
+      exitTime: null,
+      createdAt: expect.any(Date),
+      updatedAt: null,
+    });
+  });
 });
