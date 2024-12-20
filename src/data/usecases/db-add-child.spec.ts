@@ -42,6 +42,16 @@ describe('DbAddChild', () => {
     expect(sut).toBeDefined();
   });
 
+  it('Should throw if totalMinutes is less than 10', async () => {
+    const { sut } = makeSut();
+    const childData = {
+      name: 'valid_name',
+      totalMinutes: 9,
+    };
+    const promise = sut.add(childData);
+    await expect(promise).rejects.toThrow('Total minutes must be at least 10');
+  });
+
   it('Should call AddChildRepository with correct values', async () => {
     const { sut, addChildRepositoryStub } = makeSut();
     const addSpy = jest.spyOn(addChildRepositoryStub, 'add');
