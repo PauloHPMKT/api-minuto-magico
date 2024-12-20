@@ -43,4 +43,15 @@ describe('Child entity', () => {
     expect(sut.createdAt).toBeInstanceOf(Date);
     expect(sut.updatedAt).toBeNull();
   });
+
+  it('Should use current date for entryTime if not provided', () => {
+    const { sut } = makeSut();
+    const beforeCreation = new Date();
+    const entryTime = sut.entryTime;
+    const afterCreation = new Date();
+    expect(entryTime.getTime()).toBeGreaterThanOrEqual(
+      beforeCreation.getTime(),
+    );
+    expect(entryTime.getTime()).toBeLessThanOrEqual(afterCreation.getTime());
+  });
 });
