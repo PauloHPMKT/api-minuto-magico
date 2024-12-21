@@ -97,7 +97,7 @@ describe('AddChildController', () => {
     expect(httpResponse.body).toEqual(new ServerError());
   });
 
-  it('Should return 200 if valid data is provided', async () => {
+  it('Should return 201 if valid data is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -106,7 +106,7 @@ describe('AddChildController', () => {
       },
     };
     const httpResponse = await sut.handle(httpRequest);
-    expect(httpResponse.statusCode).toBe(200);
+    expect(httpResponse.statusCode).toBe(201);
     expect(httpResponse.body).toEqual({
       id: 'valid_id',
       name: 'valid_name',

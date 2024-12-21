@@ -1,6 +1,6 @@
 import { AddChild } from '../../../domain/usecase/add-child';
 import { Controller } from '../../protocols/controller';
-import { ok, serverError, badRequest } from '../../helpers/http';
+import { ok, serverError, badRequest, created } from '../../helpers/http';
 import { InvalidParamError, MissingParamError } from '../../errors';
 import { HttpRequest, HttpResponse } from '../../protocols/http';
 
@@ -23,7 +23,7 @@ export class AddChildController implements Controller {
 
       const child = await this.addChildUseCase.add({ name, totalMinutes });
 
-      return ok(child);
+      return created(child);
     } catch (error) {
       console.error(error);
       return serverError();
