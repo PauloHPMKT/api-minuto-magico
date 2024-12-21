@@ -22,8 +22,12 @@ describe('ChildRepository', () => {
   it('Should return a child on success', async () => {
     const sut = makeSut();
     const child = await sut.add({
-      name: 'any_name',
+      name: 'valid_name',
       totalMinutes: 10,
+      entryTime: new Date(),
+      exitTime: null as any,
+      createdAt: new Date(),
+      updatedAt: null as any,
     });
     expect(child).toBeTruthy();
     expect(child.id).toBeTruthy();

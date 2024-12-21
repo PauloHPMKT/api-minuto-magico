@@ -1,7 +1,14 @@
+import { randomBytes } from 'crypto';
 import { Child } from '../../domain/entities/Child';
 import { AddChildModel } from '../../domain/models/add-child';
 import { AddChildRepository } from '../protocols/add-child-repository';
 import { DbAddChild } from './db-add-child';
+
+jest.mock('crypto', () => ({
+  randomBytes: jest.fn().mockReturnValue({
+    toString: jest.fn().mockReturnValue('valid_id'),
+  }),
+}));
 
 const makeAddChildRepository = (): AddChildRepository => {
   class AddChildRepositoryStub implements AddChildRepository {
@@ -55,15 +62,19 @@ describe('DbAddChild', () => {
   it('Should call AddChildRepository with correct values', async () => {
     const { sut, addChildRepositoryStub } = makeSut();
     const addSpy = jest.spyOn(addChildRepositoryStub, 'add');
+    const createdAt = new Date();
+    const entryTime = new Date();
     const childData = {
+      id: 'valid_id',
       name: 'valid_name',
       totalMinutes: 10,
+      entryTime,
+      exitTime: null as any,
+      createdAt,
+      updatedAt: null as any,
     };
     await sut.add(childData);
-    expect(addSpy).toHaveBeenCalledWith({
-      name: 'valid_name',
-      totalMinutes: 10,
-    });
+    expect(addSpy).toHaveBeenCalledWith(childData);
   });
 
   it('Should throw if AddChildRepository throws', async () => {

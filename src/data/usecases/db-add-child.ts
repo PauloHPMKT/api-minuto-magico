@@ -10,10 +10,10 @@ export class DbAddChild implements AddChild {
     if (data.totalMinutes < 10) {
       throw new Error('Total minutes must be at least 10');
     }
-    const child = await this.addChildRepository.add({
+    const child = new Child({
       name: data.name,
       totalMinutes: data.totalMinutes,
     });
-    return child;
+    return await this.addChildRepository.add(child);
   }
 }
