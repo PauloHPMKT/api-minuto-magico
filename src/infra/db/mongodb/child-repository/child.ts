@@ -1,5 +1,4 @@
 import { Child } from '../../../../domain/entities/Child';
-import { AddChildModel } from '../../../../domain/models/add-child';
 import { AddChildRepository } from '../../../../data/protocols/add-child-repository';
 import { MongoHelper } from '../helpers/mongo-helper';
 import { ChildModel } from '../../../../domain/models/child';

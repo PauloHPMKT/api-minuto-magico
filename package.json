@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:dev": "tsx watch ./src/main/server.ts",
     "lint": "eslint . --ext .ts, .js",
     "test": "jest --silent --passWithNoTests --runInBand",
     "test:staged": "npm test --passWithNoTests --findRelatedTests",
@@ -17,6 +18,7 @@
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/js": "^9.17.0",
     "@shelf/jest-mongodb": "^4.3.2",
+    "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.2",
     "eslint": "^9.17.0",
@@ -27,10 +29,12 @@
     "prettier": "^3.4.2",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.1"
   },
   "dependencies": {
+    "express": "^4.21.2",
     "mongodb": "^6.12.0"
   }
 }
