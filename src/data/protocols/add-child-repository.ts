@@ -1,6 +1,6 @@
 import { Child } from '../../domain/entities/Child';
-import { AddChildModel } from '../../domain/models/add-child';
+import { ChildModel } from '../../domain/models/child';
 
 export interface AddChildRepository {
-  add(data: AddChildModel.Params): Promise<Child>;
+  add(data: ChildModel): Promise<Child>;
 }
