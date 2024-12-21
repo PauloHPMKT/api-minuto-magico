@@ -65,7 +65,6 @@ describe('DbAddChild', () => {
     const createdAt = new Date();
     const entryTime = new Date();
     const childData = {
-      id: 'valid_id',
       name: 'valid_name',
       totalMinutes: 10,
       entryTime,

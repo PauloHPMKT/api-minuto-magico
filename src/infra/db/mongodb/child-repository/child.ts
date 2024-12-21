@@ -8,7 +8,7 @@ export class ChildRepository implements AddChildRepository {
     const childCollection = MongoHelper.getCollection('children');
     const { insertedId } = await childCollection.insertOne(childData);
     const child = await childCollection.findOne({ _id: insertedId });
-
+    console.log(child);
     return MongoHelper.map(child);
   }
 }

@@ -9,10 +9,9 @@ export class Child {
   public createdAt?: Date;
   public updatedAt?: Date;
 
-  constructor(props: Omit<Child, 'id'>, id?: string) {
+  constructor(props: Omit<Child, 'id'>) {
     Object.assign(this, props);
 
-    this.id = id || randomBytes(12).toString('hex');
     this.entryTime = props.entryTime || new Date();
     this.exitTime = props.exitTime ?? null;
     this.createdAt = props.createdAt || new Date();

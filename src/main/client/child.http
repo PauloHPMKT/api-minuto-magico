@@ -1,0 +1,7 @@
+POST http://localhost:3003/api/children
+Content-Type: application/json
+
+{
+  "name": "Esther fia da Maria",
+  "totalMinutes": 10
+}

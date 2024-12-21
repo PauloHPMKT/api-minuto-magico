@@ -33,7 +33,6 @@ describe('Child entity', () => {
     const entryTime = new Date();
     const createdAt = new Date();
     expect(sut).toEqual({
-      id: expect.any(String),
       name: 'valid_name',
       totalMinutes: 10,
       entryTime,
@@ -41,7 +40,6 @@ describe('Child entity', () => {
       createdAt,
       updatedAt: null as any,
     });
-    expect(sut).toHaveProperty('id');
     expect(sut.name).toEqual('valid_name');
     expect(sut.totalMinutes).toEqual(10);
     expect(sut.entryTime).toBeInstanceOf(Date);
@@ -59,11 +57,5 @@ describe('Child entity', () => {
       beforeCreation.getTime(),
     );
     expect(entryTime.getTime()).toBeLessThanOrEqual(afterCreation.getTime());
-  });
-
-  it('Should create a child with a valid id', () => {
-    const { sut } = makeSut();
-    expect(sut.id).toHaveLength(24);
-    expect(sut.id).toEqual('f5c6b4f039674059e19338e0');
   });
 });
