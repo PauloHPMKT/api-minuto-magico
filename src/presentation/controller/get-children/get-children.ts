@@ -9,6 +9,14 @@ export class GetChildrenController implements Controller {
   async handle(): Promise<HttpResponse> {
     try {
       const children = await this.getChildrenUseCase.get();
+      if (!children.length) {
+        return {
+          statusCode: 404,
+          body: {
+            message: 'No children found',
+          },
+        };
+      }
       return ok(children);
     } catch (error) {
       console.error(error);

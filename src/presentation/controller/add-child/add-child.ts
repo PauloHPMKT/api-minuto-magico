@@ -1,6 +1,6 @@
 import { AddChild } from '../../../domain/usecase/add-child';
 import { Controller } from '../../protocols/controller';
-import { ok, serverError, badRequest, created } from '../../helpers/http';
+import { serverError, badRequest, created } from '../../helpers/http';
 import { InvalidParamError, MissingParamError } from '../../errors';
 import { HttpRequest, HttpResponse } from '../../protocols/http';
 
