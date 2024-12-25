@@ -8,8 +8,8 @@ export class GetChildrenController implements Controller {
 
   async handle(): Promise<HttpResponse> {
     try {
-      await this.getChildrenUseCase.get();
-      return ok([]);
+      const children = await this.getChildrenUseCase.get();
+      return ok(children);
     } catch (error) {
       console.error(error);
       return serverError();
