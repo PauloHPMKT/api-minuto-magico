@@ -72,6 +72,7 @@ describe('GetChildrenController', () => {
       .mockReturnValueOnce(new Promise((resolve) => resolve([])));
     const httpResponse = await sut.handle();
     expect(httpResponse.statusCode).toBe(404);
+    expect(httpResponse.body).toEqual(new Error('No children found'));
   });
 
   it('Should return 200 with children on success', async () => {
