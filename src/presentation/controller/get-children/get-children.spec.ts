@@ -64,6 +64,15 @@ describe('GetChildrenController', () => {
     expect(httpResponse.statusCode).toBe(500);
   });
 
+  it('Should return 404 if no children are found', async () => {
+    const { sut, getChildrenStub } = makeSut();
+    jest
+      .spyOn(getChildrenStub, 'get')
+      .mockReturnValueOnce(new Promise((resolve) => resolve([])));
+    const httpResponse = await sut.handle();
+    expect(httpResponse.statusCode).toBe(404);
+  });
+
   it('Should return 200 with children on success', async () => {
     const { sut } = makeSut();
     const httpResponse = await sut.handle();
