@@ -63,4 +63,29 @@ describe('GetChildrenController', () => {
     const httpResponse = await sut.handle();
     expect(httpResponse.statusCode).toBe(500);
   });
+
+  it('Should return 200 with children on success', async () => {
+    const { sut } = makeSut();
+    const httpResponse = await sut.handle();
+    expect(httpResponse.body).toEqual([
+      {
+        id: 'valid_id1',
+        name: 'valid_name',
+        totalMinutes: 10,
+        entryTime: new Date(),
+        exitTime: null,
+        createdAt: new Date(),
+        updatedAt: null,
+      },
+      {
+        id: 'valid_id2',
+        name: 'valid_name',
+        totalMinutes: 10,
+        entryTime: new Date(),
+        exitTime: null,
+        createdAt: new Date(),
+        updatedAt: null,
+      },
+    ]);
+  });
 });
