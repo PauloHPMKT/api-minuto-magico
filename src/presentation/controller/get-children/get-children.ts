@@ -1,5 +1,5 @@
 import { GetChildren } from '../../../domain/usecase/get-children';
-import { ok, serverError } from '../../helpers/http';
+import { notFound, ok, serverError } from '../../helpers/http';
 import { Controller } from '../../protocols/controller';
 import { HttpResponse } from '../../protocols/http';
 
@@ -10,12 +10,7 @@ export class GetChildrenController implements Controller {
     try {
       const children = await this.getChildrenUseCase.get();
       if (!children.length) {
-        return {
-          statusCode: 404,
-          body: {
-            message: 'No children found',
-          },
-        };
+        return notFound(new Error('No children found'));
       }
       return ok(children);
     } catch (error) {

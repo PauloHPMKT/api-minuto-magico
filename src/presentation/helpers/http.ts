@@ -6,6 +6,11 @@ export const badRequest = (error: Error): HttpResponse => ({
   body: error,
 });
 
+export const notFound = (error: Error): HttpResponse => ({
+  statusCode: 404,
+  body: error,
+});
+
 export const created = (data: any): HttpResponse => ({
   statusCode: 201,
   body: data,
