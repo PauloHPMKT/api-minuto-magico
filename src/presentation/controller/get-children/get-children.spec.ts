@@ -62,6 +62,7 @@ describe('GetChildrenController', () => {
     });
     const httpResponse = await sut.handle();
     expect(httpResponse.statusCode).toBe(500);
+    expect(httpResponse.body).toEqual(new Error('Internal server error'));
   });
 
   it('Should return 404 if no children are found', async () => {
