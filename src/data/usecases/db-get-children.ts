@@ -1,8 +1,12 @@
 import { Child } from '../../domain/entities/Child';
 import { GetChildren } from '../../domain/usecase/get-children';
+import { GetChildrenRepository } from '../protocols/get-children-repository';
 
 export class DbGetChildren implements GetChildren {
-  get(): Promise<Child[]> {
+  constructor(private readonly getChildrenRepository: GetChildrenRepository) {}
+
+  async get(): Promise<Child[]> {
+    await this.getChildrenRepository.get();
     return new Promise((resolve) =>
       resolve([
         {
