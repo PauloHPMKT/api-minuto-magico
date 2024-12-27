@@ -5,3 +5,7 @@ Content-Type: application/json
   "name": "Bebe Angelo Tchutchucão",
   "totalMinutes": 10
 }
+###
+
+GET http://localhost:3003/api/children
+

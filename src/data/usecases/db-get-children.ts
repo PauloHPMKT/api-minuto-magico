@@ -7,9 +7,6 @@ export class DbGetChildren implements GetChildren {
 
   async get(): Promise<Child[]> {
     const children = await this.getChildrenRepository.get();
-    if (!children.length) {
-      throw new Error('No children found');
-    }
     return children;
   }
 }

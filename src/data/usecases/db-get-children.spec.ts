@@ -63,15 +63,6 @@ describe('DbGetChildren', () => {
     await expect(promise).rejects.toThrow();
   });
 
-  it('Should throw if no children are found', async () => {
-    const { sut, getChildRepositoryStub } = makeSut();
-    jest
-      .spyOn(getChildRepositoryStub, 'get')
-      .mockReturnValueOnce(new Promise((resolve) => resolve([])));
-    const promise = sut.get();
-    await expect(promise).rejects.toThrow();
-  });
-
   it('Should return children on success', async () => {
     const { sut } = makeSut();
     const children = await sut.get();
